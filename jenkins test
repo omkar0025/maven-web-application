@@ -1,6 +1,6 @@
 node{
 def mavenHome = tool name: "maven 3.8.1"
-properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')), pipelineTriggers([githubPush()])])
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')), pipelineTriggers([pollSCM('* * * * *')])])
 stage ('checkout code'){
 git branch: 'development', credentialsId: '4cc06fb2-92b3-41ac-9051-dbeeab996776', url: 'https://github.com/omkar0025/maven-web-application.git'
 }
