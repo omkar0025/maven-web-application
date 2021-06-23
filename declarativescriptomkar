@@ -1,0 +1,54 @@
+pipeline{//pipelineopen
+agent any
+triggers{
+pollSCM('* * * * * ')
+}
+options{
+buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5'))
+}
+tools{//toolsopen
+maven "maven 3.8.1"
+}//toolsclose
+stages{//stagesopen
+stage ('checkout code'){
+steps{
+git branch: 'development', credentialsId: '4cc06fb2-92b3-41ac-9051-dbeeab996776', url: 'https://github.com/omkar0025/maven-web-application.git'
+	}
+   }
+stage('build'){//buildopen
+steps {
+sh "mvn clean package"
+}
+}//buildclose
+ stage('execute sonar qube report'){//sonaropen
+steps {
+sh "mvn clean sonar:sonar"
+}
+}//sonarclose
+stage('Put package into artifactory '){//nexusopen
+steps {
+sh "mvn clean deploy"
+}
+}//nexusclose
+stage('deploy application into tomcat'){//tomcatopen
+steps{
+sshagent(['a2a05b1a-5a0d-4b71-932c-37c357142a8a']) {
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@52.66.203.4:/opt/apache-tomcat-9.0.46/webapps/"
+}
+}
+}//tomcatclose
+ }//stagesclose
+ post{
+ success{
+ emailext body: '''Build is over - Success
+regards
+OSP''', subject: 'build is over', to: 'omkarthoopalli@gmail.com'
+ }
+ failure{
+ emailext body: '''Build is over - Failure 
+regards
+OSP''', subject: 'build is over', to: 'omkarthoopalli@gmail.com'
+ }
+ }
+   }//pipelineclose
+   
