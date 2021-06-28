@@ -8,8 +8,8 @@
 <link href="images/mithunlogo.jpg" rel="icon">
 </head>
 </head>
-<body>
-<h1 align="center">Welcome to Omkar Software Solutions baby. - GitHub WebHook demo -- 9.30 AM Batch</h1>
+<body
+<h1 align="center">Welcome to Omkar Software Solutions baby. - Scripted pipeline -- 9.30 AM Batch</h1>
 <h1 align="center"> Welcome to omkar Software matter.......We have a demo on  DevOps with AWS on  10th july 2021  at 7 PM IST for new batch. , This is a weekdays batch  . MSS- Very Good Training center for DevOps with AWS in Maratha Halli and also for Job Assitance Job Support also...Teaching Real Time scnerios and use cases... Some fake guys are giving the fake reviews dont believe those guys..I am requesting everyone. Please give your reviews in FB and Google by omkar sai prakash.</h1>
 <hr>
 <div style="text-align: center;">
